@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import Dia from '../../components/Dia'
 
 class Dashboard extends Component {
     render() {
         return ( 
-            <div>Dashboard</div>    
+            <Dia></Dia>    
         )
     }
 }
