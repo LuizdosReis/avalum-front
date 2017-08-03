@@ -3,8 +3,14 @@ import Dia from '../../components/Dia'
 
 class Dashboard extends Component {
     render() {
+        const perguntas = [
+            {titulo: 'Titulo 01'},
+            {titulo: 'Titulo 02'},
+        ]
         return ( 
-            <Dia></Dia>    
+            <main>
+                <Dia numero="1º" perguntas={perguntas} />
+            </main>   
         )
     }
 }
