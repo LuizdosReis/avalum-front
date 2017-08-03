@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { Route, BrowserRouter } from 'react-router-dom'
+import Dashboard from '../../pages/Dashboard'
+import Routes from '../../routes.js'
 
 class Root extends Component {
     render() {
         return (
-            <div>
-                Entrada da Aplicaçâo
-            </div>
+            <BrowserRouter>
+                <Routes/>
+            </BrowserRouter>
         )
     }
 }
