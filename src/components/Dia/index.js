@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './Dia.css'
+import Pergunta from "../Pergunta";
 
 class Dia extends Component {
 
@@ -17,11 +18,19 @@ class Dia extends Component {
         return (
             <section className="compDia">
                 <h1 className="compDia__titulo">{ this.state.numero } Dia</h1>
-                {this.state.perguntas.map( (pergunta, index) => {
+                <h2>Integral</h2>
+                {this.state.perguntas.integral.map( (pergunta, index) => {
                     return (
-                        <article key={ index }>
-                            <h2>{ pergunta.titulo }</h2>                    
-                        </article>
+                        <Pergunta informacaoPergunta={ pergunta } key={ index }/>
+                    )
+                })}
+
+                <hr/>
+
+                <h2>Noturno</h2>
+                {this.state.perguntas.noturno.map( (pergunta, index) => {
+                    return (
+                        <Pergunta informacaoPergunta={ pergunta } key={ index }/>
                     )
                 })}
             </section>
