@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import Dia from '../../components/Dia'
+import Dia from "../../components/Dia/index";
+import './Dashboard.css'
 
 class Dashboard extends Component {
     render() {
@@ -18,8 +19,8 @@ class Dashboard extends Component {
             ,
 
     }
-        return ( 
-            <main>
+        return (
+            <main className="pageDashboard">
                 <Dia numero="1º" perguntas={perguntas} />
                 <Dia numero="2º" perguntas={perguntas} />
                 <Dia numero="3º" perguntas={perguntas} />

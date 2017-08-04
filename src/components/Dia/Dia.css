@@ -1,7 +1,14 @@
 .compDia {
-    border: 1px solid red;
+    width: 270px;
+    display: inline-block;
+    margin: 15px;
 }
 
 .compDia__titulo {
     color: gray;
+}
+
+.compDia__containerPerguntas {
+    border: 1px solid red;
+    padding: 30px;
 }

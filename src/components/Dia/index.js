@@ -18,21 +18,23 @@ class Dia extends Component {
         return (
             <section className="compDia">
                 <h1 className="compDia__titulo">{ this.state.numero } Dia</h1>
-                <h2>Integral</h2>
-                {this.state.perguntas.integral.map( (pergunta, index) => {
-                    return (
-                        <Pergunta informacaoPergunta={ pergunta } key={ index }/>
-                    )
-                })}
+                <div className="compDia__containerPerguntas">
+                    <h2>Integral</h2>
+                    {this.state.perguntas.integral.map( (pergunta, index) => {
+                        return (
+                            <Pergunta informacaoPergunta={ pergunta } key={ index }/>
+                        )
+                    })}
 
-                <hr/>
+                    <hr/>
 
-                <h2>Noturno</h2>
-                {this.state.perguntas.noturno.map( (pergunta, index) => {
-                    return (
-                        <Pergunta informacaoPergunta={ pergunta } key={ index }/>
-                    )
-                })}
+                    <h2>Noturno</h2>
+                    {this.state.perguntas.noturno.map( (pergunta, index) => {
+                        return (
+                            <Pergunta informacaoPergunta={ pergunta } key={ index }/>
+                        )
+                    })}
+                </div>
             </section>
         )
     }
