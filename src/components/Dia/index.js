@@ -1,43 +1,32 @@
 import React, {Component} from 'react'
 import './Dia.css'
-import Pergunta from "../Pergunta";
+import Pergunta from '../Pergunta'
 
 class Dia extends Component {
+  render () {
+    return (
+      <section className='compDia'>
+        <h1 className='compDia__titulo'>{ this.props.numero } Dia</h1>
+        <div className='compDia__containerPerguntas'>
+          <h2>Integral</h2>
+          {this.props.perguntas.integral.map((pergunta, index) => {
+            return (
+              <Pergunta informacaoPergunta={pergunta} key={index} />
+            )
+          })}
 
-    constructor({ numero, perguntas }) {
-        super();
-        console.log(perguntas)
-        this.state = {
-            numero,
-            perguntas
-        }
+          <hr />
 
-    }
-
-    render() {
-        return (
-            <section className="compDia">
-                <h1 className="compDia__titulo">{ this.state.numero } Dia</h1>
-                <div className="compDia__containerPerguntas">
-                    <h2>Integral</h2>
-                    {this.state.perguntas.integral.map( (pergunta, index) => {
-                        return (
-                            <Pergunta informacaoPergunta={ pergunta } key={ index }/>
-                        )
-                    })}
-
-                    <hr/>
-
-                    <h2>Noturno</h2>
-                    {this.state.perguntas.noturno.map( (pergunta, index) => {
-                        return (
-                            <Pergunta informacaoPergunta={ pergunta } key={ index }/>
-                        )
-                    })}
-                </div>
-            </section>
-        )
-    }
+          <h2>Noturno</h2>
+          {this.props.perguntas.noturno.map((pergunta, index) => {
+            return (
+              <Pergunta informacaoPergunta={pergunta} key={index} />
+            )
+          })}
+        </div>
+      </section>
+    )
+  }
 }
 
 export default Dia
