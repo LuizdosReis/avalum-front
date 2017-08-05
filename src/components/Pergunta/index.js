@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import './Pergunta.css'
+
 class Pergunta extends Component {
 
     constructor({ informacaoPergunta }) {
@@ -10,7 +12,7 @@ class Pergunta extends Component {
     }
     render() {
         return (
-            <article>
+            <article className="compPergunta">
                 <h3>{ this.state.titulo }</h3>
             </article>
         )
