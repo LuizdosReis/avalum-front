@@ -11,6 +11,8 @@ class Dashboard extends Component {
         noturno: []
       }
     }
+
+    this.mostraConsole = this.mostraConsole.bind(this)
   }
 
   componentDidMount () {
@@ -28,22 +30,22 @@ class Dashboard extends Component {
     })
   }
 
+  mostraConsole() {
+    console.log(this)
+  }
+
   render () {
     return (
       <main className='pageDashboard'>
-        <button onClick={() => {
-          this.setState({
-            perguntas: { }
-          })
-        }}>
-          Clean
-        </button>
-        <Dia numero='1º' perguntas={this.state.perguntas} />
-        <Dia numero='2º' perguntas={this.state.perguntas} />
-        <Dia numero='3º' perguntas={this.state.perguntas} />
-        <Dia numero='4º' perguntas={this.state.perguntas} />
-        <Dia numero='5º' perguntas={this.state.perguntas} />
-        <Dia numero='6º' perguntas={this.state.perguntas} />
+        <Dia numero='1º' perguntas={{
+          integral: [],
+          noturno: []
+        }} handleMostraConsole={ this.mostraConsole }/>
+        <Dia numero='2º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
+        <Dia numero='3º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
+        <Dia numero='4º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
+        <Dia numero='5º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
+        <Dia numero='6º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
       </main>
     )
   }
