@@ -10,10 +10,14 @@ class Dashboard extends Component {
       perguntas: {
         integral: [],
         noturno: []
+      },
+      modal: {
+        status: false,
+        componente: (<div></div>)
       }
     }
 
-    this.mostraModalPergunta = this.mostraModalPergunta.bind(this)
+    this.toggleModalPergunta = this.toggleModalPergunta.bind(this)
   }
 
   componentDidMount () {
@@ -31,7 +35,16 @@ class Dashboard extends Component {
     })
   }
 
-  mostraModalPergunta() {
+  toggleModalPergunta(event) {
+    event.stopPropagation()
+
+    if(event.target.classList.contains('modal__toggle')) {
+      this.setState({
+        modal: {
+          status: !this.state.modal.status
+        }
+      })
+    }
   }
 
   render () {
@@ -40,13 +53,14 @@ class Dashboard extends Component {
         <Dia numero='1º' perguntas={{
           integral: [],
           noturno: []
-        }} mostraModalPergunta={ this.mostraModalPergunta }/>
-        <Dia numero='2º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
-        <Dia numero='3º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
-        <Dia numero='4º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
-        <Dia numero='5º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
-        <Dia numero='6º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
-        { false && <Modal/> }
+        }} mostraModalPergunta={ this.toggleModalPergunta }/>
+        <Dia numero='2º' perguntas={this.state.perguntas} mostraModalPergunta={ this.toggleModalPergunta }/>
+        <Dia numero='3º' perguntas={this.state.perguntas} mostraModalPergunta={ this.toggleModalPergunta }/>
+        <Dia numero='4º' perguntas={this.state.perguntas} mostraModalPergunta={ this.toggleModalPergunta }/>
+        <Dia numero='5º' perguntas={this.state.perguntas} mostraModalPergunta={ this.toggleModalPergunta }/>
+        <Dia numero='6º' perguntas={this.state.perguntas} mostraModalPergunta={ this.toggleModalPergunta }/>
+        { this.state.modal.status &&
+          <Modal item={ this.state.modal } fechaModal={ this.toggleModalPergunta } /> }
       </main>
     )
   }
