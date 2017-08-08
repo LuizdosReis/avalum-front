@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Dia from '../../components/Dia/index'
+import Modal from '../../components/Modal/index'
 import './Dashboard.css'
 
 class Dashboard extends Component {
@@ -12,7 +13,7 @@ class Dashboard extends Component {
       }
     }
 
-    this.mostraConsole = this.mostraConsole.bind(this)
+    this.mostraModalPergunta = this.mostraModalPergunta.bind(this)
   }
 
   componentDidMount () {
@@ -30,8 +31,7 @@ class Dashboard extends Component {
     })
   }
 
-  mostraConsole() {
-    console.log(this)
+  mostraModalPergunta() {
   }
 
   render () {
@@ -40,12 +40,13 @@ class Dashboard extends Component {
         <Dia numero='1º' perguntas={{
           integral: [],
           noturno: []
-        }} handleMostraConsole={ this.mostraConsole }/>
-        <Dia numero='2º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
-        <Dia numero='3º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
-        <Dia numero='4º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
-        <Dia numero='5º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
-        <Dia numero='6º' perguntas={this.state.perguntas} handleMostraConsole={ this.mostraConsole }/>
+        }} mostraModalPergunta={ this.mostraModalPergunta }/>
+        <Dia numero='2º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
+        <Dia numero='3º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
+        <Dia numero='4º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
+        <Dia numero='5º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
+        <Dia numero='6º' perguntas={this.state.perguntas} mostraModalPergunta={ this.mostraModalPergunta }/>
+        { false && <Modal/> }
       </main>
     )
   }

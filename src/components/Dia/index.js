@@ -23,7 +23,7 @@ class Dia extends Component {
               <Pergunta informacaoPergunta={pergunta} key={index} />
             )
           })}
-          <button className='compDia__adicionarPergunta' onClick={ this.props.handleMostraConsole }>+</button>
+          <button className='compDia__adicionarPergunta' onClick={ this.props.mostraModalPergunta }>+</button>
         </div>
       </section>
     )
