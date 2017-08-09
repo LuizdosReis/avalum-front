@@ -23,7 +23,7 @@ class Dia extends Component {
               <Pergunta informacaoPergunta={pergunta} key={index} />
             )
           })}
-          <button className='compDia__adicionarPergunta modal__toggle' onClick={ this.props.mostraModalPergunta }>
+          <button className='compDia__adicionarPergunta jsModal__toggle' onClick={ this.props.mostraModalPergunta }>
             +
           </button>
         </div>

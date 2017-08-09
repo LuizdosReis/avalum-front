@@ -4,25 +4,32 @@ import './Modal.css'
 class Modal extends Component {
 
   render() {
-    console.log(this.props)
     return(
-      <section className="modal modal__toggle" onClick={ this.props.fechaModal }>
-        <div className="modal__container">
-          <button className="modal__toggle" onClick={ this.props.fechaModal }>Fechar</button>
-          <form action="">
-            <textarea cols="50" rows="30" placeholder="Escreva aqui sua pergunta"></textarea>
-            <label>
-              Única Escolha
-              <input type="radio"/>
-            </label>
-            <label>
-              Multipla Escolha
-              <input type="radio"/>
-            </label>
+      <section className="compModal jsModal__toggle" onClick={ this.props.fechaModal }>
+        <div className="compModal__container">
+          <button className="compModal__buttonClose jsModal__toggle" onClick={ this.props.fechaModal }>Fechar</button>
+          <form action="" onSubmit={ this.props.action }>
+            {/*<div>*/}
+              {/*<textarea className="compModal__pergunta" rows="8" placeholder="Escreva aqui sua pergunta"></textarea>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+              {/*<label>*/}
+                {/*Única Escolha*/}
+                {/*<input type="radio"/>*/}
+              {/*</label>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+              {/*<label>*/}
+                {/*Multipla Escolha*/}
+                {/*<input type="radio"/>*/}
+              {/*</label>*/}
+            {/*</div>*/}
 
-            <input type="text" />
+            <div>
+              <input onChange={this.props.trataTitulo} value={this.props.novaPergunta.titulo} type="text" />
+            </div>
 
-            <button type="submit"></button>
+            <button type="submit">Salvar</button>
           </form>
         </div>
       </section>

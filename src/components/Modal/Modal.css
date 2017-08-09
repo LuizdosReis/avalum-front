@@ -1,4 +1,4 @@
-.modal {
+.compModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -6,15 +6,26 @@
   bottom: 0;
   overflow: scroll;
   background: rgba(0,0,0, .5);
+  display: flex;
+  justify-content: center;
+  align-items:center;
 }
 
-.modal__container {
-  max-width: 400px;
-  height: 1000px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: -0px auto;
+.compModal__container {
+  background-color: #EDEFF0;
+  min-width: 400px;
+  position: relative;
   z-index: 101;
+  padding: 20px 10px;
+  border-radius: 5px;
+}
+
+.compModal__pergunta {
+
+}
+
+.compModal__buttonClose {
+  position: absolute;
+  top: -10px;
+  right: -10px;
 }
