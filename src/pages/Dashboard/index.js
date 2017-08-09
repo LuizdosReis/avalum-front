@@ -18,12 +18,12 @@ class Dashboard extends Component {
         dia:2,
         perguntas: {
           integral: [
-            {titulo: 'Integral 01 Titulo 01'},
-            {titulo: 'Integral 02 Titulo 02'}
+            {enunciado: 'Integral 01 Titulo 01'},
+            {enunciado: 'Integral 02 Titulo 02'}
           ],
           noturno: [
-            {titulo: 'Noturno 01 Titulo 01'},
-            {titulo: 'Noturno 02 Titulo 02'}
+            {enunciado: 'Noturno 01 Titulo 01'},
+            {enunciado: 'Noturno 02 Titulo 02'}
           ]
         }
       },
@@ -32,12 +32,12 @@ class Dashboard extends Component {
         dia:3,
         perguntas: {
           integral: [
-            {titulo: 'Integral 01 Titulo 01'},
-            {titulo: 'Integral 02 Titulo 02'}
+            {enunciado: 'Integral 01 Titulo 01'},
+            {enunciado: 'Integral 02 Titulo 02'}
           ],
           noturno: [
-            {titulo: 'Noturno 01 Titulo 01'},
-            {titulo: 'Noturno 02 Titulo 02'}
+            {enunciado: 'Noturno 01 Titulo 01'},
+            {enunciado: 'Noturno 02 Titulo 02'}
           ]
         }
       },
@@ -46,12 +46,12 @@ class Dashboard extends Component {
         dia:4,
         perguntas: {
           integral: [
-            {titulo: 'Integral 01 Titulo 01'},
-            {titulo: 'Integral 02 Titulo 02'}
+            {enunciado: 'Integral 01 Titulo 01'},
+            {enunciado: 'Integral 02 Titulo 02'}
           ],
           noturno: [
-            {titulo: 'Noturno 01 Titulo 01'},
-            {titulo: 'Noturno 02 Titulo 02'}
+            {enunciado: 'Noturno 01 Titulo 01'},
+            {enunciado: 'Noturno 02 Titulo 02'}
           ]
         }
       },
@@ -60,12 +60,12 @@ class Dashboard extends Component {
         dia:5,
         perguntas: {
           integral: [
-            {titulo: 'Integral 01 Titulo 01'},
-            {titulo: 'Integral 02 Titulo 02'}
+            {enunciado: 'Integral 01 Titulo 01'},
+            {enunciado: 'Integral 02 Titulo 02'}
           ],
           noturno: [
-            {titulo: 'Noturno 01 Titulo 01'},
-            {titulo: 'Noturno 02 Titulo 02'}
+            {enunciado: 'Noturno 01 Titulo 01'},
+            {enunciado: 'Noturno 02 Titulo 02'}
           ]
         }
       }
@@ -85,14 +85,16 @@ class Dashboard extends Component {
         componente: (<div></div>)
       },
       novaPergunta: {
-        titulo: "",
+        enunciado: "",
         dia: 0
       }
     }
 
     this.toggleModalPergunta = this.toggleModalPergunta.bind(this)
     this.pegaFormulario = this.pegaFormulario.bind(this)
-    this.trataTitulo = this.trataTitulo.bind(this)
+    this.trataEnunciado = this.trataEnunciado.bind(this)
+    this.trataTipoResposta = this.trataTipoResposta.bind(this)
+    this.trataResposta = this.trataResposta.bind(this)
   }
 
   toggleModalPergunta(event, dia) {
@@ -104,8 +106,10 @@ class Dashboard extends Component {
           visivel: !this.state.modal.visivel
         },
         novaPergunta: {
-          titulo: "",
-          dia: dia
+          enunciado: "",
+          dia: dia,
+          tipoResposta: "",
+          respostas: [""]
         }
       })
     }
@@ -115,19 +119,31 @@ class Dashboard extends Component {
     event.preventDefault();
 
     console.log(this.state.novaPergunta)
+
+    this.setState({
+      modal: {
+        visivel: !this.state.modal.visivel
+      }
+    })
   }
 
 
-  trataTitulo(event){
+  trataEnunciado(event){
+    let novaPergunta = this.state.novaPergunta
+    novaPergunta.enunciado = event.target.value
+    this.setState({ novaPergunta })
+  }
 
-    let dia = this.state.novaPergunta.dia
+  trataTipoResposta(event) {
+    let novaPergunta = this.state.novaPergunta
+    novaPergunta.tipoResposta = event.target.value
+    this.setState({ novaPergunta })
+  }
 
-    this.setState({
-      novaPergunta: {
-        titulo: event.target.value,
-        dia: dia
-      }
-    })
+  trataResposta(event, index) {
+    let novaPergunta = this.state.novaPergunta
+    novaPergunta.respostas[index] = event.target.value
+    this.setState({ novaPergunta })
   }
 
   render () {
@@ -152,7 +168,12 @@ class Dashboard extends Component {
 
         }
 
-        { this.state.modal.visivel && <Modal item={ this.state.modal } action={ this.pegaFormulario } trataTitulo={this.trataTitulo} novaPergunta={this.state.novaPergunta} fechaModal={ this.toggleModalPergunta } /> }
+        { this.state.modal.visivel && <Modal item={ this.state.modal }
+                                             action={ this.pegaFormulario }
+                                             trataEnunciado={this.trataEnunciado}
+                                             novaPergunta={ this.state.novaPergunta } fechaModal={ this.toggleModalPergunta }
+                                             trataTipoResposta={ this.trataTipoResposta }
+                                             trataResposta={ this.trataResposta }/> }
       </main>
     )
   }
