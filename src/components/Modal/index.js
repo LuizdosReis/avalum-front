@@ -10,21 +10,21 @@ class Modal extends Component {
           <button className="compModal__buttonClose jsModal__toggle" onClick={ this.props.fechaModal }>Fechar</button>
           <form action="" onSubmit={ this.props.action }>
             <div>
-              <textarea onChange={this.props.trataEnunciado} value={this.props.novaPergunta.enunciado} className="compModal__pergunta" rows="8" placeholder="Escreva aqui sua pergunta"></textarea>
+              <textarea onChange={ this.props.trataEnunciado } value={ this.props.novaPergunta.enunciado } className="compModal__pergunta" rows="8" placeholder="Escreva aqui sua pergunta"></textarea>
             </div>
             <div>
               <label>
                 Única Escolha
-                <input onClick={this.props.trataTipoResposta} value="SINGLE" name="tipoResposta" type="radio" />
+                <input onClick={ this.props.trataTipoResposta } value="SINGLE" name="tipoResposta" type="radio" />
               </label>
             </div>
             <div>
               <label>
                 Multipla Escolha
-                <input onClick={this.props.trataTipoResposta} value="MULTIPLE" name="tipoResposta" type="radio"/>
+                <input onClick={ this.props.trataTipoResposta } value="MULTIPLE" name="tipoResposta" type="radio"/>
               </label>
             </div>
-
+            <button onClick={ this.props.adicionaNovoCampoDeResposta } type="button">Nova Reposta</button>
             { this.props.novaPergunta.respostas.map((resposta, index) => { return (
 
               <div key={ index }>

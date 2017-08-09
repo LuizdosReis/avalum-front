@@ -95,6 +95,7 @@ class Dashboard extends Component {
     this.trataEnunciado = this.trataEnunciado.bind(this)
     this.trataTipoResposta = this.trataTipoResposta.bind(this)
     this.trataResposta = this.trataResposta.bind(this)
+    this.adicionaNovoCampoDeResposta = this.adicionaNovoCampoDeResposta.bind(this)
   }
 
   toggleModalPergunta(event, dia) {
@@ -109,7 +110,7 @@ class Dashboard extends Component {
           enunciado: "",
           dia: dia,
           tipoResposta: "",
-          respostas: [""]
+          respostas: []
         }
       })
     }
@@ -146,6 +147,12 @@ class Dashboard extends Component {
     this.setState({ novaPergunta })
   }
 
+  adicionaNovoCampoDeResposta() {
+    let novaPergunta = this.state.novaPergunta
+    novaPergunta.respostas.push("")
+    this.setState({ novaPergunta })
+  }
+
   render () {
     return (
       <main className='pageDashboard'>
@@ -173,7 +180,8 @@ class Dashboard extends Component {
                                              trataEnunciado={this.trataEnunciado}
                                              novaPergunta={ this.state.novaPergunta } fechaModal={ this.toggleModalPergunta }
                                              trataTipoResposta={ this.trataTipoResposta }
-                                             trataResposta={ this.trataResposta }/> }
+                                             trataResposta={ this.trataResposta }
+                                             adicionaNovoCampoDeResposta={ this.adicionaNovoCampoDeResposta }/> }
       </main>
     )
   }
