@@ -119,7 +119,17 @@ class Dashboard extends Component {
   pegaFormulario(event) {
     event.preventDefault();
 
-    console.log(this.state.novaPergunta)
+    fetch("http://localhost:8080/perguntas/",
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept-Type': 'accept/json'
+        },
+        body: JSON.stringify(this.state.novaPergunta)
+      }).then(function (res) {
+      res.json().then(json => console.log(json))
+    });
 
     this.setState({
       modal: {
