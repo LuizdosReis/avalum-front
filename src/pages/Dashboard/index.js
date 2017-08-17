@@ -124,7 +124,7 @@ class Dashboard extends Component {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
-          'Accept-Type': 'accept/json'
+          'Accept': 'application/json'
         },
         body: JSON.stringify(this.state.novaPergunta)
       }).then(function (res) {
