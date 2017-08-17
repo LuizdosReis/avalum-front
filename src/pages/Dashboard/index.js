@@ -91,10 +91,10 @@ class Dashboard extends Component {
     }
 
     this.toggleModalPergunta = this.toggleModalPergunta.bind(this)
-    this.pegaFormulario = this.pegaFormulario.bind(this)
-    this.trataEnunciado = this.trataEnunciado.bind(this)
-    this.trataTipoResposta = this.trataTipoResposta.bind(this)
-    this.trataResposta = this.trataResposta.bind(this)
+    this.submitFormulario = this.submitFormulario.bind(this)
+    this.setEnunciado = this.setEnunciado.bind(this)
+    this.setTipoResposta = this.setTipoResposta.bind(this)
+    this.setResposta = this.setResposta.bind(this)
     this.adicionaNovoCampoDeResposta = this.adicionaNovoCampoDeResposta.bind(this)
   }
 
@@ -116,7 +116,7 @@ class Dashboard extends Component {
     }
   }
 
-  pegaFormulario(event) {
+  submitFormulario(event) {
     event.preventDefault();
 
     fetch("http://localhost:8080/perguntas/",
@@ -139,19 +139,19 @@ class Dashboard extends Component {
   }
 
 
-  trataEnunciado(event){
+  setEnunciado(event){
     let novaPergunta = this.state.novaPergunta
     novaPergunta.enunciado = event.target.value
     this.setState({ novaPergunta })
   }
 
-  trataTipoResposta(event) {
+  setTipoResposta(event) {
     let novaPergunta = this.state.novaPergunta
     novaPergunta.tipoResposta = event.target.value
     this.setState({ novaPergunta })
   }
 
-  trataResposta(event, index) {
+  setResposta(event, index) {
     let novaPergunta = this.state.novaPergunta
     novaPergunta.respostas[index] = event.target.value
     this.setState({ novaPergunta })
@@ -186,11 +186,11 @@ class Dashboard extends Component {
         }
 
         { this.state.modal.visivel && <Modal item={ this.state.modal }
-                                             action={ this.pegaFormulario }
-                                             trataEnunciado={this.trataEnunciado}
+                                             action={ this.submitFormulario }
+                                             setEnunciado={this.setEnunciado}
                                              novaPergunta={ this.state.novaPergunta } fechaModal={ this.toggleModalPergunta }
-                                             trataTipoResposta={ this.trataTipoResposta }
-                                             trataResposta={ this.trataResposta }
+                                             setTipoResposta={ this.setTipoResposta }
+                                             setResposta={ this.setResposta }
                                              adicionaNovoCampoDeResposta={ this.adicionaNovoCampoDeResposta }/> }
       </main>
     )
