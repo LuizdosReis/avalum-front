@@ -5,74 +5,6 @@ import './Dashboard.css'
 
 class Dashboard extends Component {
 
-  dados = [
-      {
-        dia:1,
-        perguntas:{
-          integral: [],
-          noturno: []
-        }
-      },
-
-      {
-        dia:2,
-        perguntas: {
-          integral: [
-            {enunciado: 'Integral 01 Titulo 01'},
-            {enunciado: 'Integral 02 Titulo 02'}
-          ],
-          noturno: [
-            {enunciado: 'Noturno 01 Titulo 01'},
-            {enunciado: 'Noturno 02 Titulo 02'}
-          ]
-        }
-      },
-
-      {
-        dia:3,
-        perguntas: {
-          integral: [
-            {enunciado: 'Integral 01 Titulo 01'},
-            {enunciado: 'Integral 02 Titulo 02'}
-          ],
-          noturno: [
-            {enunciado: 'Noturno 01 Titulo 01'},
-            {enunciado: 'Noturno 02 Titulo 02'}
-          ]
-        }
-      },
-
-      {
-        dia:4,
-        perguntas: {
-          integral: [
-            {enunciado: 'Integral 01 Titulo 01'},
-            {enunciado: 'Integral 02 Titulo 02'}
-          ],
-          noturno: [
-            {enunciado: 'Noturno 01 Titulo 01'},
-            {enunciado: 'Noturno 02 Titulo 02'}
-          ]
-        }
-      },
-
-      {
-        dia:5,
-        perguntas: {
-          integral: [
-            {enunciado: 'Integral 01 Titulo 01'},
-            {enunciado: 'Integral 02 Titulo 02'}
-          ],
-          noturno: [
-            {enunciado: 'Noturno 01 Titulo 01'},
-            {enunciado: 'Noturno 02 Titulo 02'}
-          ]
-        }
-      }
-
-    ]
-
-
   constructor () {
     super()
     this.state = {
@@ -137,16 +69,33 @@ class Dashboard extends Component {
     event.preventDefault();
 
     fetch("http://localhost:8080/perguntas/", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(this.state.novaPergunta)
-      }).then(res =>  {
-        res.json()
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(this.state.novaPergunta)
+    })
+      .then(res => {
+        if (res.status !== 201) throw new Error()
+        return res
       })
-      .then(json => console.log(json))
+      .then(res => res.json())
+      .then((pergunta) => {
+        let dias = this.state.dias
+        let perguntasDesteDia = dias[pergunta.dia - 1].perguntas
+        const diasAtualizados = dias.map((dia) => {
+          if (dia.numeroDia === pergunta.dia)
+            dia.perguntas = [...perguntasDesteDia, pergunta]
+          return dia
+        })
+
+        this.setState({
+          dias: diasAtualizados
+        })
+
+      })
+      .catch(err => console.error(err))
 
     this.setState({
       modal: {
@@ -187,7 +136,6 @@ class Dashboard extends Component {
 
         {
           this.state.dias.map( (dia) => {
-                      console.log(dia.perguntas)
                       return (
                         <Dia
                              key={dia.numeroDia}
