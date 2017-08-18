@@ -87,8 +87,15 @@ class Dashboard extends Component {
       novaPergunta: {
         enunciado: "",
         dia: 0
-      }
+      },
+      dias: [
+        {
+          numeroDia: 0,
+          perguntas: []
+        }
+      ]
     }
+
 
     this.toggleModalPergunta = this.toggleModalPergunta.bind(this)
     this.submitFormulario = this.submitFormulario.bind(this)
@@ -96,6 +103,16 @@ class Dashboard extends Component {
     this.setTipoResposta = this.setTipoResposta.bind(this)
     this.setResposta = this.setResposta.bind(this)
     this.adicionaNovoCampoDeResposta = this.adicionaNovoCampoDeResposta.bind(this)
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:8080/dias/')
+      .then( res => res.json() )
+      .then( dias => {
+        this.setState({
+          dias
+        })
+      })
   }
 
   toggleModalPergunta(event, dia) {
@@ -119,17 +136,17 @@ class Dashboard extends Component {
   submitFormulario(event) {
     event.preventDefault();
 
-    fetch("http://localhost:8080/perguntas/",
-      {
+    fetch("http://localhost:8080/perguntas/", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify(this.state.novaPergunta)
-      }).then(function (res) {
-      res.json().then(json => console.log(json))
-    });
+      }).then(res =>  {
+        res.json()
+      })
+      .then(json => console.log(json))
 
     this.setState({
       modal: {
@@ -169,14 +186,14 @@ class Dashboard extends Component {
 
 
         {
-          this.dados.map( (dado) => {
-
+          this.state.dias.map( (dia) => {
+                      console.log(dia.perguntas)
                       return (
                         <Dia
-                             key={dado.dia}
-                             numero={dado.dia}
-                             perguntas={dado.perguntas}
-                             mostraModalPergunta={ (event) => this.toggleModalPergunta(event, dado.dia) }/>
+                             key={dia.numeroDia}
+                             numero={dia.numeroDia}
+                             perguntas={dia.perguntas}
+                             mostraModalPergunta={ (event) => this.toggleModalPergunta(event, dia.numeroDia) }/>
                       )
 
 

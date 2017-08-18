@@ -9,20 +9,12 @@ class Dia extends Component {
         <h1 className='compDia__titulo'>{ this.props.numero } Dia</h1>
         <div className='compDia__containerPerguntas'>
           <h2>Integral</h2>
-          {this.props.perguntas.integral.map((pergunta, index) => {
+          {this.props.perguntas.map((pergunta, index) => {
             return (
               <Pergunta informacaoPergunta={pergunta} key={index} />
             )
           })}
 
-          <hr />
-
-          <h2>Noturno</h2>
-          {this.props.perguntas.noturno.map((pergunta, index) => {
-            return (
-              <Pergunta informacaoPergunta={pergunta} key={index} />
-            )
-          })}
           <button className='compDia__adicionarPergunta jsModal__toggle' onClick={ this.props.mostraModalPergunta }>
             +
           </button>
