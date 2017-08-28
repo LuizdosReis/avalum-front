@@ -8,26 +8,9 @@ class Dashboard extends Component {
   constructor () {
     super()
     this.state = {
-      perguntas: {
-        integral: [],
-        noturno: []
-      },
-      modal: {
-        visivel: false,
-        componente: (<div></div>)
-      },
-      novaPergunta: {
-        enunciado: "",
-        dia: 0
-      },
-      dias: [
-        {
-          numeroDia: 0,
-          perguntas: []
-        }
-      ]
+      modal: {},
+      dias: []
     }
-
 
     this.toggleModalPergunta = this.toggleModalPergunta.bind(this)
     this.submitFormulario = this.submitFormulario.bind(this)
@@ -56,7 +39,7 @@ class Dashboard extends Component {
         modal: {
           visivel: !this.state.modal.visivel
         },
-        novaPergunta: {
+        pergunta: {
           enunciado: "",
           dia: dia,
           tipoResposta: "",
@@ -69,14 +52,16 @@ class Dashboard extends Component {
   submitFormulario(event) {
     event.preventDefault();
 
-    fetch("http://localhost:8080/perguntas/", {
+    const request = {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(this.state.novaPergunta)
-    })
+      body: JSON.stringify(this.state.pergunta)
+    };
+
+    fetch("http://localhost:8080/perguntas/", request)
       .then(res => {
         if (res.status !== 201) throw new Error()
         return res
@@ -107,27 +92,27 @@ class Dashboard extends Component {
 
 
   setEnunciado(event){
-    let novaPergunta = this.state.novaPergunta
-    novaPergunta.enunciado = event.target.value
-    this.setState({ novaPergunta })
+    let pergunta = this.state.pergunta
+    pergunta.enunciado = event.target.value
+    this.setState({ pergunta })
   }
 
   setTipoResposta(event) {
-    let novaPergunta = this.state.novaPergunta
-    novaPergunta.tipoResposta = event.target.value
-    this.setState({ novaPergunta })
+    let pergunta = this.state.pergunta
+    pergunta.tipoResposta = event.target.value
+    this.setState({ pergunta })
   }
 
   setResposta(event, index) {
-    let novaPergunta = this.state.novaPergunta
-    novaPergunta.respostas[index] = event.target.value
-    this.setState({ novaPergunta })
+    let pergunta = this.state.pergunta
+    pergunta.respostas[index] = event.target.value
+    this.setState({ pergunta })
   }
 
   adicionaNovoCampoDeResposta() {
-    let novaPergunta = this.state.novaPergunta
-    novaPergunta.respostas.push("")
-    this.setState({ novaPergunta })
+    let pergunta = this.state.pergunta
+    pergunta.respostas.push("")
+    this.setState({ pergunta })
   }
 
 
@@ -138,7 +123,7 @@ class Dashboard extends Component {
       modal: {
         visivel: !this.state.modal.visivel
       },
-      novaPergunta: pergunta
+      pergunta: pergunta
     })
   }
 
@@ -168,7 +153,7 @@ class Dashboard extends Component {
         { this.state.modal.visivel && <Modal item={ this.state.modal }
                                              action={ this.submitFormulario }
                                              setEnunciado={this.setEnunciado}
-                                             novaPergunta={ this.state.novaPergunta } fechaModal={ this.toggleModalPergunta }
+                                             pergunta={ this.state.pergunta } fechaModal={ this.toggleModalPergunta }
                                              setTipoResposta={ this.setTipoResposta }
                                              setResposta={ this.setResposta }
                                              adicionaNovoCampoDeResposta={ this.adicionaNovoCampoDeResposta }/> }
