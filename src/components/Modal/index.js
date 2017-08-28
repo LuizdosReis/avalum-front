@@ -15,16 +15,16 @@ class Modal extends Component {
             <div>
               <label>
                 Única Escolha
-                <input onClick={ this.props.setTipoResposta } value="SINGLE" name="tipoResposta" type="radio" />
+                <input onClick={ this.props.setTipoResposta } value="SINGLE" name="tipoResposta" type="radio" readOnly={this.props.novaPergunta.id != null} checked={this.props.novaPergunta.tipoResposta === "SINGLE"}/>
               </label>
             </div>
             <div>
               <label>
                 Multipla Escolha
-                <input onClick={ this.props.setTipoResposta } value="MULTIPLE" name="tipoResposta" type="radio"/>
+                <input onClick={ this.props.setTipoResposta } value="MULTIPLE" name="tipoResposta" type="radio" readOnly={this.props.novaPergunta.id != null} checked={this.props.novaPergunta.tipoResposta === "MULTIPLE"}/>
               </label>
             </div>
-            <button onClick={ this.props.adicionaNovoCampoDeResposta } type="button">Nova Reposta</button>
+            <button onClick={ this.props.adicionaNovoCampoDeResposta } type="button" className={ this.props.novaPergunta.id? "--hidden": "" }>Nova Reposta</button>
             { this.props.novaPergunta.respostas.map((resposta, index) => { return (
 
               <div key={ index }>
@@ -32,7 +32,7 @@ class Modal extends Component {
               </div>
             )}) }
 
-            <button type="submit">Salvar</button>
+            <button type="submit" className={ this.props.novaPergunta.id? "--hidden": "" }>Salvar</button>
           </form>
         </div>
       </section>

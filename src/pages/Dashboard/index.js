@@ -132,6 +132,8 @@ class Dashboard extends Component {
 
 
   exibePergunta(pergunta){
+    console.log(pergunta)
+
     this.setState({
       modal: {
         visivel: !this.state.modal.visivel
