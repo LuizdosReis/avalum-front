@@ -35,6 +35,7 @@ class Dashboard extends Component {
     this.setTipoResposta = this.setTipoResposta.bind(this)
     this.setResposta = this.setResposta.bind(this)
     this.adicionaNovoCampoDeResposta = this.adicionaNovoCampoDeResposta.bind(this)
+    this.exibePergunta = this.exibePergunta.bind(this)
   }
 
   componentDidMount(){
@@ -129,6 +130,16 @@ class Dashboard extends Component {
     this.setState({ novaPergunta })
   }
 
+
+  exibePergunta(pergunta){
+    this.setState({
+      modal: {
+        visivel: !this.state.modal.visivel
+      },
+      novaPergunta: pergunta
+    })
+  }
+
   render () {
     return (
       <main className='pageDashboard'>
@@ -141,7 +152,9 @@ class Dashboard extends Component {
                              key={dia.numeroDia}
                              numero={dia.numeroDia}
                              perguntas={dia.perguntas}
-                             mostraModalPergunta={ (event) => this.toggleModalPergunta(event, dia.numeroDia) }/>
+                             mostraModalPergunta={ (event) => this.toggleModalPergunta(event, dia.numeroDia) }
+                             exibePergunta={this.exibePergunta}
+                             />
                       )
 
 

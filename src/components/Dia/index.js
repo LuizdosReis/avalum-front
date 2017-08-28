@@ -11,7 +11,7 @@ class Dia extends Component {
           <h2>Integral</h2>
           {this.props.perguntas.map((pergunta, index) => {
             return (
-              <Pergunta informacaoPergunta={pergunta} key={index} />
+              <Pergunta informacaoPergunta={pergunta} key={index} exibePergunta={this.props.exibePergunta}/>
             )
           })}
 
