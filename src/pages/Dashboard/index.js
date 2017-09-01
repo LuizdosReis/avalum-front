@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Dia from '../../components/Dia/index'
 import Modal from '../../components/Modal/index'
+import PropTypes from 'prop-types'
 import './Dashboard.css'
+import { DashboardService } from "../../services/DashboardAction"
 
 class Dashboard extends Component {
 
@@ -22,13 +24,13 @@ class Dashboard extends Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:8080/dias/')
-      .then( res => res.json() )
-      .then( dias => {
-        this.setState({
-          dias
-        })
-      })
+    DashboardService.listaDias(this.context.store)
+  }
+
+  componentWillMount(){
+    this.context.store.subscribe(() => {
+      this.setState({dias: this.context.store.getState()})
+    })
   }
 
   toggleModalPergunta(event, dia) {
@@ -117,8 +119,6 @@ class Dashboard extends Component {
 
 
   exibePergunta(pergunta){
-    console.log(pergunta)
-
     this.setState({
       modal: {
         visivel: !this.state.modal.visivel
@@ -160,6 +160,10 @@ class Dashboard extends Component {
       </main>
     )
   }
+}
+
+Dashboard.contextTypes = {
+  store : PropTypes.object.isRequired
 }
 
 export default Dashboard
