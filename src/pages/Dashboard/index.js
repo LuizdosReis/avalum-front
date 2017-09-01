@@ -24,7 +24,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount(){
-    DashboardService.listaDias(this.context.store)
+    this.context.store.dispatch(DashboardService.listaDias())
   }
 
   componentWillMount(){
