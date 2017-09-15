@@ -6,14 +6,25 @@ class Dia extends Component {
   render () {
     return (
       <section className='compDia'>
-        <h1 className='compDia__titulo'>{ this.props.numero } Dia</h1>
+        <h1 className='compDia__titulo'>{ this.props.dia.numeroDia } Dia</h1>
         <div className='compDia__containerPerguntas'>
-          <h2>Integral</h2>
-          {this.props.perguntas.map((pergunta, index) => {
-            return (
-              <Pergunta informacaoPergunta={pergunta} key={index} exibePergunta={this.props.exibePergunta}/>
+
+
+          {
+            Object.keys(this.props.dia.periodoPerguntas).map(periodo => {
+              return (
+                  <div>
+                    <h2>{periodo}</h2>
+                    {this.props.dia.periodoPerguntas[periodo.toString()].map((pergunta, index) => {
+                      return (
+                          <Pergunta informacaoPergunta={pergunta} key={index} exibePergunta={this.props.exibePergunta}/>
+                        )
+                    })}
+                  </div>
+                )
+              }
             )
-          })}
+          }
 
           <button className='compDia__adicionarPergunta jsModal__toggle' onClick={ this.props.mostraModalPergunta }>
             +

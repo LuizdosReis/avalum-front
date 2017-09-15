@@ -3,7 +3,7 @@ import Dia from '../../components/Dia/index'
 import Modal from '../../components/Modal/index'
 import PropTypes from 'prop-types'
 import './Dashboard.css'
-import { DashboardService } from "../../services/DashboardAction"
+import { DashboardService } from "../../services/DashboardService"
 
 class Dashboard extends Component {
 
@@ -137,8 +137,7 @@ class Dashboard extends Component {
                       return (
                         <Dia
                              key={dia.numeroDia}
-                             numero={dia.numeroDia}
-                             perguntas={dia.perguntas}
+                             dia={dia}
                              mostraModalPergunta={ (event) => this.toggleModalPergunta(event, dia.numeroDia) }
                              exibePergunta={this.exibePergunta}
                              />
