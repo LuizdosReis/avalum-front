@@ -10,6 +10,16 @@ class Modal extends Component {
           <button className="compModal__buttonClose jsModal__toggle" onClick={ this.props.fechaModal }>Fechar</button>
           <form action="" onSubmit={ this.props.action }>
             <div>
+              <label>
+                Integral
+                <input onClick={ this.props.setPeriodo } type="radio" value="INTEGRAL" name="periodo"/>
+              </label>
+              <label>
+                Noturno
+                <input onClick={ this.props.setPeriodo } type="radio" value="NOTURNO"  name="periodo"/>
+              </label>
+            </div>
+            <div>
               <textarea onChange={ this.props.setEnunciado } value={ this.props.pergunta.enunciado } className="compModal__pergunta" rows="8" placeholder="Escreva aqui sua pergunta"></textarea>
             </div>
             <div>

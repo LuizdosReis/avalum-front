@@ -18,6 +18,7 @@ class Dashboard extends Component {
     this.submitFormulario = this.submitFormulario.bind(this)
     this.setEnunciado = this.setEnunciado.bind(this)
     this.setTipoResposta = this.setTipoResposta.bind(this)
+    this.setPeriodo = this.setPeriodo.bind(this)
     this.setResposta = this.setResposta.bind(this)
     this.adicionaNovoCampoDeResposta = this.adicionaNovoCampoDeResposta.bind(this)
     this.exibePergunta = this.exibePergunta.bind(this)
@@ -63,6 +64,7 @@ class Dashboard extends Component {
       body: JSON.stringify(this.state.pergunta)
     };
 
+
     fetch("http://localhost:8080/perguntas/", request)
       .then(res => {
         if (res.status !== 201) throw new Error()
@@ -71,12 +73,22 @@ class Dashboard extends Component {
       .then(res => res.json())
       .then((pergunta) => {
         let dias = this.state.dias
-        let perguntasDesteDia = dias[pergunta.dia - 1].perguntas
-        const diasAtualizados = dias.map((dia) => {
-          if (dia.numeroDia === pergunta.dia)
-            dia.perguntas = [...perguntasDesteDia, pergunta]
-          return dia
-        })
+
+        let diasAtualizados
+        if (dias[pergunta.dia -1].periodoPerguntas[pergunta.periodo]) {
+          let perguntasDesteDia = dias[pergunta.dia -1].periodoPerguntas[pergunta.periodo]
+          diasAtualizados = dias.map(dia => {
+            if (dia.numeroDia === pergunta.dia)
+              dia.periodoPerguntas[pergunta.periodo] = [...perguntasDesteDia, pergunta]
+
+            return dia
+          })
+        } else {
+          let periodo = pergunta.periodo
+          dias[pergunta.dia -1].periodoPerguntas[periodo] = [pergunta]
+          diasAtualizados = dias
+        }
+
 
         this.setState({
           dias: diasAtualizados
@@ -102,6 +114,12 @@ class Dashboard extends Component {
   setTipoResposta(event) {
     let pergunta = this.state.pergunta
     pergunta.tipoResposta = event.target.value
+    this.setState({ pergunta })
+  }
+
+  setPeriodo(event) {
+    let pergunta = this.state.pergunta
+    pergunta.periodo = event.target.value
     this.setState({ pergunta })
   }
 
@@ -155,6 +173,7 @@ class Dashboard extends Component {
                                              pergunta={ this.state.pergunta } fechaModal={ this.toggleModalPergunta }
                                              setTipoResposta={ this.setTipoResposta }
                                              setResposta={ this.setResposta }
+                                             setPeriodo={ this.setPeriodo }
                                              adicionaNovoCampoDeResposta={ this.adicionaNovoCampoDeResposta }/> }
       </main>
     )

@@ -11,10 +11,10 @@ class Dia extends Component {
 
 
           {
-            Object.keys(this.props.dia.periodoPerguntas).map(periodo => {
+            Object.keys(this.props.dia.periodoPerguntas).map((periodo, index) => {
               return (
-                  <div>
-                    <h2>{periodo}</h2>
+                  <div key={index}>
+                    <h2>{periodo.charAt(0)+periodo.slice(1).toLocaleLowerCase()}</h2>
                     {this.props.dia.periodoPerguntas[periodo.toString()].map((pergunta, index) => {
                       return (
                           <Pergunta informacaoPergunta={pergunta} key={index} exibePergunta={this.props.exibePergunta}/>
