@@ -19,7 +19,7 @@ class Modal extends Component {
               </label>
             </div>
             <div>
-              <textarea onChange={ this.props.setEnunciado } value={ this.props.pergunta.enunciado } className="compModal__pergunta" rows="8" placeholder="Escreva aqui sua pergunta"></textarea>
+              <textarea disabled={this.props.pergunta.id != null} onChange={ this.props.setEnunciado } value={ this.props.pergunta.enunciado } className="compModal__pergunta" rows="8" placeholder="Escreva aqui sua pergunta"></textarea>
             </div>
             <div>
               <label>
