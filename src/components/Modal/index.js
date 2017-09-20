@@ -11,12 +11,11 @@ class Modal extends Component {
           <form action="" onSubmit={ this.props.action }>
             <div>
               <label>
-                Integral
-                <input onClick={ this.props.setPeriodo } type="radio" value="INTEGRAL" name="periodo"/>
-              </label>
-              <label>
-                Noturno
-                <input onClick={ this.props.setPeriodo } type="radio" value="NOTURNO"  name="periodo"/>
+                Período
+                <select disabled={this.props.pergunta.id != null} value={this.props.pergunta.periodo} onChange={ this.props.setPeriodo }>
+                  <option value="INTEGRAL">Integral</option>
+                  <option value="NOTURNO">Noturno</option>
+                </select>
               </label>
             </div>
             <div>
@@ -24,21 +23,18 @@ class Modal extends Component {
             </div>
             <div>
               <label>
-                Única Escolha
-                <input onClick={ this.props.setTipoResposta } value="SINGLE" name="tipoResposta" type="radio" readOnly={this.props.pergunta.id != null} checked={this.props.pergunta.tipoResposta === "SINGLE"}/>
-              </label>
-            </div>
-            <div>
-              <label>
-                Multipla Escolha
-                <input onClick={ this.props.setTipoResposta } value="MULTIPLE" name="tipoResposta" type="radio" readOnly={this.props.pergunta.id != null} checked={this.props.pergunta.tipoResposta === "MULTIPLE"}/>
+                Tipo de Alternativa
+                <select disabled={this.props.pergunta.id != null} value={this.props.pergunta.tipoResposta} onChange={ this.props.setTipoResposta }>
+                  <option value="SINGLE">Única Escolha</option>
+                  <option value="MULTIPLE">Multipla Escolha</option>
+                </select>
               </label>
             </div>
             <button onClick={ this.props.adicionaNovoCampoDeResposta } type="button" className={ this.props.pergunta.id? "--hidden": "" }>Nova Reposta</button>
             { this.props.pergunta.respostas.map((resposta, index) => { return (
 
               <div key={ index }>
-                <input onChange={ event => this.props.setResposta(event, index) } value={ this.props.pergunta.respostas[index] } type="text" />
+                <input disabled={this.props.pergunta.id != null} onChange={ event => this.props.setResposta(event, index) } value={ this.props.pergunta.respostas[index] } type="text" />
               </div>
             )}) }
 
