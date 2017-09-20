@@ -3,6 +3,7 @@ import './Modal.css'
 
 class Modal extends Component {
 
+
   render() {
     return(
       <section className="compModal jsModal__toggle" onClick={ this.props.fechaModal }>
@@ -13,6 +14,7 @@ class Modal extends Component {
               <label>
                 Período
                 <select disabled={this.props.pergunta.id != null} value={this.props.pergunta.periodo} onChange={ this.props.setPeriodo }>
+                  <option value="">Selecione um período</option>
                   <option value="INTEGRAL">Integral</option>
                   <option value="NOTURNO">Noturno</option>
                 </select>
@@ -25,6 +27,7 @@ class Modal extends Component {
               <label>
                 Tipo de Alternativa
                 <select disabled={this.props.pergunta.id != null} value={this.props.pergunta.tipoResposta} onChange={ this.props.setTipoResposta }>
+                  <option value="">Selecione um tipo de resposta</option>
                   <option value="SINGLE">Única Escolha</option>
                   <option value="MULTIPLE">Multipla Escolha</option>
                 </select>
