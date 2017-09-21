@@ -54,48 +54,7 @@ class Dashboard extends Component {
 
   submitFormulario(event) {
     event.preventDefault();
-
-    const request = {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(this.state.pergunta)
-    };
-
-
-    fetch("http://localhost:8080/perguntas/", request)
-      .then(res => {
-        if (res.status !== 201) throw new Error()
-        return res
-      })
-      .then(res => res.json())
-      .then((pergunta) => {
-        let dias = this.state.dias
-
-        let diasAtualizados
-        if (dias[pergunta.dia -1].periodoPerguntas[pergunta.periodo]) {
-          let perguntasDesteDia = dias[pergunta.dia -1].periodoPerguntas[pergunta.periodo]
-          diasAtualizados = dias.map(dia => {
-            if (dia.numeroDia === pergunta.dia)
-              dia.periodoPerguntas[pergunta.periodo] = [...perguntasDesteDia, pergunta]
-
-            return dia
-          })
-        } else {
-          let periodo = pergunta.periodo
-          dias[pergunta.dia -1].periodoPerguntas[periodo] = [pergunta]
-          diasAtualizados = dias
-        }
-
-
-        this.setState({
-          dias: diasAtualizados
-        })
-
-      })
-      .catch(err => console.error(err))
+    this.context.store.dispatch(DashboardService.salva(this.state.pergunta, this.state.dias))
 
     this.setState({
       modal: {
