@@ -1,5 +1,5 @@
 const initialState = {
-  modal: {visivel:false, pergunta:{}},
+  modal: {visivel:false, pergunta:{}, tipoModal: ""},
   dias: []
 }
 
@@ -23,8 +23,9 @@ export function dashboard(state = initialState, action) {
       return state
 
     case 'EXIBIR_PERGUNTA':
-      state.modal.visivel = !state.modal.visivel
+      state.modal.visivel = true
       state.modal.pergunta = action.pergunta
+      state.modal.tipoModal = "PERGUNTA"
       return state
 
     case 'TOOGLE_MODAL_PERGUNTA':
@@ -36,6 +37,13 @@ export function dashboard(state = initialState, action) {
         respostas: [],
         periodo: ""
       }
+      state.modal.tipoModal = "PERGUNTA"
+      return state
+
+    case 'MOSTRA_MODAL_CURSOS':
+      state.modal.visivel = true
+      state.modal.pergunta = action.pergunta
+      state.modal.tipoModal = 'CURSOS'
       return state
 
     default:

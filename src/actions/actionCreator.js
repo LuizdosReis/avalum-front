@@ -13,3 +13,7 @@ export function exibePergunta(pergunta) {
 export function toggleModalPergunta(dia) {
   return {type: 'TOOGLE_MODAL_PERGUNTA', dia}
 }
+
+export function mostraModalCursos(pergunta){
+  return {type: 'MOSTRA_MODAL_CURSOS', pergunta}
+}

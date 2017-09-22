@@ -1,4 +1,4 @@
-import {listaDias, salvaPergunta, exibePergunta, toggleModalPergunta} from '../actions/actionCreator'
+import {listaDias, salvaPergunta, exibePergunta, toggleModalPergunta, mostraModalCursos} from '../actions/actionCreator'
 export class DashboardService {
 
   static listaDias() {
@@ -49,4 +49,9 @@ export class DashboardService {
     }
   }
 
+  static mostraModalCursos(pergunta) {
+    return dispatch => {
+      dispatch(mostraModalCursos(pergunta))
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import './Modal.css'
 import PerguntaForm from '../PerguntaForm'
+import CursosForm from '../CursosForm'
 
 
 class Modal extends Component {
@@ -11,16 +12,24 @@ class Modal extends Component {
         <div className="compModal__container">
           <button className="compModal__buttonClose jsModal__toggle" onClick={ this.props.fechaModal }>Fechar</button>
 
-          <PerguntaForm
-            action={this.props.action}
-            setEnunciado={this.props.setEnunciado}
-            setTipoResposta={this.props.setTipoResposta}
-            setResposta={this.props.setReposta}
-            setPeriodo={this.props.setPeriodo}
-            adicionaNovoCampoDeResposta={this.props.adicionaNovoCampoDeResposta}
-            pergunta={this.props.pergunta}
-            fechaModal={this.props.fechaModal}
-          />
+          {
+            this.props.tipoModal === 'PERGUNTA' &&
+              <PerguntaForm
+                action={this.props.action}
+                setEnunciado={this.props.setEnunciado}
+                setTipoResposta={this.props.setTipoResposta}
+                setResposta={this.props.setResposta}
+                setPeriodo={this.props.setPeriodo}
+                adicionaNovoCampoDeResposta={this.props.adicionaNovoCampoDeResposta}
+                pergunta={this.props.pergunta}
+                fechaModal={this.props.fechaModal}
+              />
+          }
+
+          {
+            this.props.tipoModal === 'CURSOS' &&
+              <CursosForm pergunta={this.props.pergunta}/>
+          }
 
         </div>
       </section>

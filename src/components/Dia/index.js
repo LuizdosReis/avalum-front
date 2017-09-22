@@ -17,7 +17,7 @@ class Dia extends Component {
                     <h2>{periodo.charAt(0)+periodo.slice(1).toLocaleLowerCase()}</h2>
                     {this.props.dia.periodoPerguntas[periodo.toString()].map((pergunta, index) => {
                       return (
-                          <Pergunta informacaoPergunta={pergunta} key={index} exibePergunta={this.props.exibePergunta}/>
+                          <Pergunta informacaoPergunta={pergunta} key={index} exibePerguntaOuCursos={this.props.exibePerguntaOuCursos}/>
                         )
                     })}
                   </div>
