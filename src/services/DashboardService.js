@@ -1,3 +1,4 @@
+import {listaDias, salvaPergunta, exibePergunta, toggleModalPergunta} from '../actions/actionCreator'
 export class DashboardService {
 
   static listaDias() {
@@ -5,7 +6,7 @@ export class DashboardService {
       fetch('http://localhost:8080/dias/')
         .then(res => res.json())
         .then(dias => {
-          dispatch({type: 'LISTAR_DIAS', dias})
+          dispatch(listaDias(dias))
           return dias
         })
     }
@@ -29,7 +30,7 @@ export class DashboardService {
         })
         .then(res => res.json())
         .then(pergunta => {
-          dispatch({type: 'SALVAR_PERGUNTA', pergunta})
+          dispatch(salvaPergunta(pergunta))
           return pergunta
         })
         .catch(err => console.error(err))
@@ -38,13 +39,13 @@ export class DashboardService {
 
   static exibePergunta(pergunta) {
     return dispatch => {
-      dispatch({type: 'EXIBIR_PERGUNTA', pergunta})
+      dispatch(exibePergunta(pergunta))
     }
   }
 
   static toggleModalPergunta(dia) {
     return dispatch => {
-      dispatch({type: 'TOOGLE_MODAL_PERGUNTA', dia})
+      dispatch(toggleModalPergunta(dia))
     }
   }
 
