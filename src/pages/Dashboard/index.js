@@ -40,31 +40,31 @@ class Dashboard extends Component {
   }
 
   setEnunciado(event) {
-    let pergunta = this.state.pergunta
+    let pergunta = this.state.modal.pergunta
     pergunta.enunciado = event.target.value
     this.setState({pergunta})
   }
 
   setTipoResposta(event) {
-    let pergunta = this.state.pergunta
+    let pergunta = this.state.modal.pergunta
     pergunta.tipoResposta = event.target.value
     this.setState({pergunta})
   }
 
   setPeriodo(event) {
-    let pergunta = this.state.pergunta
+    let pergunta = this.state.modal.pergunta
     pergunta.periodo = event.target.value
     this.setState({pergunta})
   }
 
   setResposta(event, index) {
-    let pergunta = this.state.pergunta
+    let pergunta = this.state.modal.pergunta
     pergunta.respostas[index] = event.target.value
     this.setState({pergunta})
   }
 
   adicionaNovoCampoDeResposta() {
-    let pergunta = this.state.pergunta
+    let pergunta = this.state.modal.pergunta
     pergunta.respostas.push("")
     this.setState({pergunta})
   }
@@ -75,14 +75,14 @@ class Dashboard extends Component {
     if (event.target.classList.contains('jsModal__toggle')) {
       this.setState({
         modal: {
-          visivel: !this.state.modal.visivel
+          visivel: !this.state.modal.visivel,
+          pergunta: {
+            enunciado: "",
+            dia: dia,
+            tipoResposta: "",
+            respostas: []
+          }
         },
-        pergunta: {
-          enunciado: "",
-          dia: dia,
-          tipoResposta: "",
-          respostas: []
-        }
       })
     }
   }
@@ -90,9 +90,9 @@ class Dashboard extends Component {
   exibePergunta(pergunta) {
     this.setState({
       modal: {
-        visivel: !this.state.modal.visivel
+        visivel: !this.state.modal.visivel,
+        pergunta: pergunta
       },
-      pergunta: pergunta
     })
   }
 
@@ -106,21 +106,22 @@ class Dashboard extends Component {
                 key={dia.numeroDia}
                 dia={dia}
                 mostraModalPergunta={(event) => this.toggleModalPergunta(event, dia.numeroDia)}
-                exibePergunta={this.exibePergunta}
-              />
+                exibePergunta={this.exibePergunta}/>
             )
           })
         }
 
-        {this.state.modal.visivel && <Modal item={this.state.modal}
+        {
+          this.state.modal.visivel && <Modal
                                             action={this.submitFormulario}
                                             setEnunciado={this.setEnunciado}
-                                            pergunta={this.state.pergunta}
-                                            fechaModal={this.toggleModalPergunta}
                                             setTipoResposta={this.setTipoResposta}
                                             setResposta={this.setResposta}
                                             setPeriodo={this.setPeriodo}
-                                            adicionaNovoCampoDeResposta={this.adicionaNovoCampoDeResposta}/>}
+                                            adicionaNovoCampoDeResposta={this.adicionaNovoCampoDeResposta}
+                                            pergunta={this.state.modal.pergunta}
+                                            fechaModal={this.toggleModalPergunta}/>
+        }
       </main>
     )
   }
