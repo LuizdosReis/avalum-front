@@ -36,4 +36,16 @@ export class DashboardService {
     }
   }
 
+  static exibePergunta(pergunta) {
+    return dispatch => {
+      dispatch({type: 'EXIBIR_PERGUNTA', pergunta})
+    }
+  }
+
+  static toggleModalPergunta(dia) {
+    return dispatch => {
+      dispatch({type: 'TOOGLE_MODAL_PERGUNTA', dia})
+    }
+  }
+
 }

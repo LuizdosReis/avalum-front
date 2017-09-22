@@ -71,29 +71,12 @@ class Dashboard extends Component {
 
   toggleModalPergunta(event, dia) {
     event.stopPropagation()
-
-    if (event.target.classList.contains('jsModal__toggle')) {
-      this.setState({
-        modal: {
-          visivel: !this.state.modal.visivel,
-          pergunta: {
-            enunciado: "",
-            dia: dia,
-            tipoResposta: "",
-            respostas: []
-          }
-        },
-      })
-    }
+    if (event.target.classList.contains('jsModal__toggle'))
+      this.context.store.dispatch(DashboardService.toggleModalPergunta(dia))
   }
 
   exibePergunta(pergunta) {
-    this.setState({
-      modal: {
-        visivel: !this.state.modal.visivel,
-        pergunta: pergunta
-      },
-    })
+    this.context.store.dispatch(DashboardService.exibePergunta(pergunta))
   }
 
   render() {

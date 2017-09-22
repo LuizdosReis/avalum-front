@@ -1,5 +1,5 @@
 const initialState = {
-  modal: {},
+  modal: {visivel:false, pergunta:{}},
   dias: []
 }
 
@@ -17,7 +17,27 @@ export function dashboard(state = initialState, action) {
       let periodo = action.pergunta.periodo
       dia.periodoPerguntas[periodo] = [action.pergunta]
     }
-    state.modal = !state.modal
+    state.modal.visivel = !state.modal.visivel
+    return state
+  }
+
+  if (action.type === 'EXIBIR_PERGUNTA') {
+    state.modal.visivel = !state.modal.visivel
+    state.modal.pergunta = action.pergunta
+
+    return state
+  }
+
+  if (action.type === 'TOOGLE_MODAL_PERGUNTA') {
+    state.modal.visivel = !state.modal.visivel
+    state.modal.pergunta = {
+      enunciado: "",
+      dia: action.dia,
+      tipoResposta: "",
+      respostas: [],
+      periodo: ""
+    }
+
     return state
   }
 
