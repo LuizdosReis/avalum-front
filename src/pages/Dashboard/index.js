@@ -30,7 +30,7 @@ class Dashboard extends Component {
 
   componentWillMount(){
     this.context.store.subscribe(() => {
-      this.setState({dias: this.context.store.getState()})
+      this.setState(this.context.store.getState())
     })
   }
 
@@ -55,12 +55,6 @@ class Dashboard extends Component {
   submitFormulario(event) {
     event.preventDefault();
     this.context.store.dispatch(DashboardService.salva(this.state.pergunta, this.state.dias))
-
-    this.setState({
-      modal: {
-        visivel: !this.state.modal.visivel
-      }
-    })
   }
 
 
