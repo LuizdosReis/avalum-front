@@ -17,8 +17,7 @@ export function dashboard(state = initialState, action) {
       let periodo = action.pergunta.periodo
       dia.periodoPerguntas[periodo] = [action.pergunta]
     }
-    let modal = state.modal;
-    modal = !modal
+    state.modal = !state.modal
     return state
   }
 
