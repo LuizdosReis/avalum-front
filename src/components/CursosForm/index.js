@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {CursosService} from "../../services/CursosService";
 
 class CursosForm extends Component {
 
@@ -9,10 +10,15 @@ class CursosForm extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/cursos/' + this.props.pergunta.periodo + '?dia=' + this.props.pergunta.dia)
-      .then(res => res.json())
-      .then(cursos => this.setState({cursos}))
+    this.props.store.dispatch(CursosService.listaCursos(this.props.pergunta.periodo, this.props.pergunta.dia))
   }
+
+  componentWillMount() {
+    this.props.store.subscribe(() => {
+      this.setState({cursos: this.props.store.getState().cursosForm})
+    })
+  }
+
   render() {
     return (
       <div>
