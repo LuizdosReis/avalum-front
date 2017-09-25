@@ -1,6 +1,7 @@
 const initialState = {
   modal: {visivel:false, pergunta:{}, tipoModal: ""},
-  dias: []
+  dias: [],
+  cursos: []
 }
 
 export function dashboard(state = initialState, action) {
@@ -44,6 +45,10 @@ export function dashboard(state = initialState, action) {
       state.modal.visivel = true
       state.modal.pergunta = action.pergunta
       state.modal.tipoModal = 'CURSOS'
+      return state
+
+    case 'LISTA_CURSOS_DISPONIVEIS':
+      state.cursos = action.cursos
       return state
 
     default:

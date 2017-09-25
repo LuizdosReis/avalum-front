@@ -17,3 +17,7 @@ export function toggleModalPergunta(dia) {
 export function mostraModalCursos(pergunta){
   return {type: 'MOSTRA_MODAL_CURSOS', pergunta}
 }
+
+export function listaCursosDisponiveis(cursos){
+  return {type: 'LISTA_CURSOS_DISPONIVEIS', cursos}
+}

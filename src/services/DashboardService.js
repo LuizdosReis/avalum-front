@@ -1,4 +1,4 @@
-import {listaDias, salvaPergunta, exibePergunta, toggleModalPergunta, mostraModalCursos} from '../actions/actionCreator'
+import {listaDias, salvaPergunta, exibePergunta, toggleModalPergunta, mostraModalCursos, listaCursosDisponiveis} from '../actions/actionCreator'
 export class DashboardService {
 
   static listaDias() {
@@ -52,6 +52,14 @@ export class DashboardService {
   static mostraModalCursos(pergunta) {
     return dispatch => {
       dispatch(mostraModalCursos(pergunta))
+    }
+  }
+
+  static listaCursosDisponiveis(periodo, dia) {
+    return dispatch => {
+      fetch('http://localhost:8080/cursos/' + periodo + '?dia=' + dia)
+        .then(res => res.json())
+        .then(cursos => dispatch(listaCursosDisponiveis(cursos)))
     }
   }
 }

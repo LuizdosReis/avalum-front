@@ -22,6 +22,7 @@ class Dashboard extends Component {
     this.adicionaNovoCampoDeResposta = this.adicionaNovoCampoDeResposta.bind(this)
     this.toggleModalPergunta = this.toggleModalPergunta.bind(this)
     this.exibePerguntaOuCursos = this.exibePerguntaOuCursos.bind(this)
+    this.getCursosDisponiveis = this.getCursosDisponiveis.bind(this)
   }
 
   componentDidMount() {
@@ -82,6 +83,11 @@ class Dashboard extends Component {
       this.context.store.dispatch(DashboardService.exibePergunta(pergunta))
   }
 
+  getCursosDisponiveis(periodo, dia){
+    this.context.store.dispatch(DashboardService.listaCursosDisponiveis(periodo, dia))
+    return this.state.cursos
+  }
+
   render() {
     return (
       <main className='pageDashboard'>
@@ -110,6 +116,7 @@ class Dashboard extends Component {
               pergunta={this.state.modal.pergunta}
               tipoModal={this.state.modal.tipoModal}
               fechaModal={this.toggleModalPergunta}
+              getCursosDisponiveis={this.getCursosDisponiveis}
             />
         }
       </main>
