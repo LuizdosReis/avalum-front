@@ -28,10 +28,7 @@ class Modal extends Component {
 
           {
             this.props.tipoModal === 'CURSOS' &&
-              <CursosForm
-                pergunta={this.props.pergunta}
-                store={this.props.store}
-              />
+              <CursosForm pergunta={this.props.pergunta}/>
           }
 
         </div>

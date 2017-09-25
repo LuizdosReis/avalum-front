@@ -30,7 +30,7 @@ class Dashboard extends Component {
 
   componentWillMount() {
     this.context.store.subscribe(() => {
-      this.setState(this.context.store.getState().dashboard)
+      this.setState(this.context.store.getState())
     })
   }
 
@@ -110,7 +110,6 @@ class Dashboard extends Component {
               pergunta={this.state.modal.pergunta}
               tipoModal={this.state.modal.tipoModal}
               fechaModal={this.toggleModalPergunta}
-              store={this.context.store}
             />
         }
       </main>
