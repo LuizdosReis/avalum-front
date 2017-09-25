@@ -12,7 +12,7 @@ export class DashboardService {
     }
   }
 
-  static salva(pergunta, diasAtuais) {
+  static salva(pergunta) {
     return dispatch => {
       const request = {
         method: "POST",

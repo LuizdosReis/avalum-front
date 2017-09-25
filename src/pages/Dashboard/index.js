@@ -37,7 +37,7 @@ class Dashboard extends Component {
 
   submitFormulario(event) {
     event.preventDefault();
-    this.context.store.dispatch(DashboardService.salva(this.state.pergunta, this.state.dias))
+    this.context.store.dispatch(DashboardService.salva(this.state.pergunta))
   }
 
   setEnunciado(event) {
